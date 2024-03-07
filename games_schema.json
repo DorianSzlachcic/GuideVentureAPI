@@ -36,7 +36,7 @@
                 }
             },
             "if_type_quiz": {
-                "quiz": {
+                "questions": {
                     "type": "array",
                     "min": 1,
                     "items": {
