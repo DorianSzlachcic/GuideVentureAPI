@@ -19,7 +19,7 @@
                 "type": "string",
                 "enum": ["navigate", "quiz", "puzzle", "photo"]
             },
-            "point": {
+            "points": {
                 "type": "integer",
                 "range": [0, 1000],
                 "description": "Amount of points user gets after completing step"
