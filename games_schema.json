@@ -1,0 +1,74 @@
+{
+    "id": {
+        "description": "Automatically created ID of the game"
+    },
+    "title": {
+        "type": "string",
+        "description": "Title of the game"
+    },
+    "introduction": {
+        "type": "string",
+        "description": "Introduction for the game. Will be displayed at the start of the game"
+    },
+    "steps": {
+        "type": "array",
+        "description": "Steps of the game",
+        "items": {
+            "step_type": {
+                "description": "Type of the step",
+                "type": "string",
+                "enum": ["navigate", "quiz", "puzzle", "photo"]
+            },
+            "point": {
+                "type": "integer",
+                "range": [0, 1000],
+                "description": "Amount of points user gets after completing step"
+            },
+            "step_description": {
+                "type": "string",
+                "description": "Description of step, showing up on the top of the screen"
+            },
+            "if_type_navigate": {
+                "geolocation": {
+                    "type": "array",
+                    "size": 2,
+                    "description": "2-element array, [latitude, longitude]"
+                }
+            },
+            "if_type_quiz": {
+                "quiz": {
+                    "type": "array",
+                    "min": 1,
+                    "items": {
+                        "question_type": {
+                            "type": "string",
+                            "enum": ["multiple_choice", "single_choice", "text_answer"],
+                            "description": "Question type"
+                        },
+                        "question": {
+                            "type": "string",
+                            "description": "Question"
+                        },
+                        "answers": {
+                            "type": "array",
+                            "items": "string",
+                            "description": "Array of answers. For question_type=single_choice first answer is cosidered as correct answer. For question_type=text_answer array should contain only 1 item."
+                        },
+                        "num_of_correct_ans": {
+                            "type": "integer",
+                            "default": 1,
+                            "description": "Number of correct answers for question. For question_type != multiple_choice value should be 1."
+                        }
+                    }
+                }
+            },
+            "if_type_puzzle": {
+                "image_source": {
+                    "type": "string",
+                    "description": "Source of the image used in puzzles, URI or file path"
+                }
+            },
+            "if_type_photo": {}
+        }
+    }
+}
