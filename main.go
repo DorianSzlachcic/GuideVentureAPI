@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"guideventure/api/api"
+	"guideventureapi/api"
 	"log"
 )
 
