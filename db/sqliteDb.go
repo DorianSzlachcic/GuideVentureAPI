@@ -26,3 +26,8 @@ func NewDb() (*SQLiteDb, error) {
 	sqliteDb := SQLiteDb{file, db}
 	return &sqliteDb, nil
 }
+
+func (s *SQLiteDb) CreateDummyData() error {
+	_, err := s.db.Exec(queries.DUMMY_DATA)
+	return err
+}

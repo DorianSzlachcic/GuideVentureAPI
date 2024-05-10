@@ -11,7 +11,12 @@ func main() {
 	listenAddr := flag.String("listenAddr", ":8000", "the server address")
 	flag.Parse()
 
-	_, err := db.NewDb()
+	sqliteDb, err := db.NewDb()
+	if err != nil {
+		log.Panic(err)
+	}
+
+	err = sqliteDb.CreateDummyData()
 	if err != nil {
 		log.Panic(err)
 	}
