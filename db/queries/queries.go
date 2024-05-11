@@ -1,6 +1,6 @@
 package queries
 
-const CREATE = `CREATE TABLE IF NOT EXISTS games (
+const Create = `CREATE TABLE IF NOT EXISTS games (
 					id INTEGER NOT NULL PRIMARY KEY,
 					title TEXT NOT NULL,
 					introduction TEXT
@@ -27,7 +27,7 @@ const CREATE = `CREATE TABLE IF NOT EXISTS games (
 					FOREIGN KEY(step_id) REFERENCES steps(id)
 				);`
 
-const DUMMY_DATA = `INSERT INTO games VALUES(1, 'Przykładowa gra', 'Gra przykładowa stworzona na potrzebny developmentu');
+const DummyData = `INSERT INTO games VALUES(1, 'Przykładowa gra', 'Gra przykładowa stworzona na potrzebny developmentu');
 					INSERT INTO steps VALUES(1, 1, 1, 'navigate', 50, 'Przejdź do punktu startowego', 51.109730, 17.030655, NULL);
 					INSERT INTO steps VALUES(2, 1, 2, 'quiz', 300, 'Odpowiedz na poniższe pytania', NULL, NULL, NULL);
 					INSERT INTO questions VALUES(1, 2, 'single_choice', 'Gdzie się znajdujesz?', 'Wrocław;Gdańsk;Poznań;Inne', 1);
@@ -38,3 +38,6 @@ const DUMMY_DATA = `INSERT INTO games VALUES(1, 'Przykładowa gra', 'Gra przykł
 					INSERT INTO steps VALUES(5, 1, 5, 'navigate', 50, 'Przejdź do następnego punktu', 51.114046, 17.031246, NULL);
 					INSERT INTO steps VALUES(6, 1, 6, 'puzzle', 300, 'Ułóżcie puzzle', NULL, NULL, 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Wroclaw_-_Uniwersytet_Wroclawski_o_poranku.jpg/1200px-Wroclaw_-_Uniwersytet_Wroclawski_o_poranku.jpg');
 					`
+
+const SelectGames = `SELECT * FROM games;`
+const SelectGameById = `SELECT * FROM games WHERE id=?;`

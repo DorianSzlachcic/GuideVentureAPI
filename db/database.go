@@ -1,6 +1,9 @@
 package db
 
+import "guideventureapi/models"
+
 type Database interface {
-	NewDb() error
 	CreateDummyData() error
+	GetGames() ([]models.Game, error)
+	GetGame(string) (*models.Game, error)
 }
