@@ -7,10 +7,11 @@ import (
 )
 
 func main() {
-	listenAddr := flag.String("listenAddr", ":8000", "the server address")
+	listenAddr := flag.String("listenAddr", ":8000", "server address")
+	createDummyData := flag.Bool("dummyData", false, "create set of dummy data for development")
 	flag.Parse()
 
-	server, err := api.NewServer(*listenAddr)
+	server, err := api.NewServer(*listenAddr, *createDummyData)
 	if err != nil {
 		log.Panic(err)
 	}

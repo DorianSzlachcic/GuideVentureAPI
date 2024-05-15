@@ -2,6 +2,7 @@ package api
 
 import (
 	"guideventureapi/db"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -12,16 +13,18 @@ type Server struct {
 	db         db.Database
 }
 
-func NewServer(listenAddr string) (*Server, error) {
+func NewServer(listenAddr string, createDummyData bool) (*Server, error) {
 	db, err := db.NewSQLiteDb()
 	if err != nil {
 		return nil, err
 	}
 
-	// err = sqliteDb.CreateDummyData()
-	// if err != nil {
-	// 	log.Panic(err)
-	// }
+	if createDummyData {
+		err = db.CreateDummyData()
+		if err != nil {
+			log.Panic(err)
+		}
+	}
 
 	return &Server{
 		listenAddr: listenAddr,
