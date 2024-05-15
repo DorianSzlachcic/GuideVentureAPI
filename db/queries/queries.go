@@ -41,3 +41,7 @@ const DummyData = `INSERT INTO games VALUES(1, 'Przykładowa gra', 'Gra przykła
 
 const SelectGames = `SELECT * FROM games;`
 const SelectGameById = `SELECT * FROM games WHERE id=?;`
+const SelectSteps = `SELECT steps.* FROM steps JOIN games ON steps.game_id=games.id WHERE games.id=?;`
+const SelectStepByIndex = `SELECT steps.* FROM steps JOIN games ON steps.game_id=games.id WHERE games.id=? AND steps.step_index=?;`
+const SelectStepId = `SELECT steps.id FROM steps JOIN games ON steps.game_id=games.id WHERE games.id=? AND steps.step_index=?;`
+const SelectQuestions = `SELECT questions.* FROM questions JOIN steps ON questions.step_id=steps.id WHERE steps.id=?;`
