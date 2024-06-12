@@ -97,7 +97,7 @@ func (s *Server) GetQuestions(c *gin.Context) {
 func (s *Server) Start() error {
 	router := gin.Default()
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"localhost:8081"},
+		AllowOrigins:     []string{"*"},
 		AllowMethods:     []string{"GET"},
 		AllowHeaders:     []string{"Content-Type", "Authorization", "Cache-Control"},
 		AllowCredentials: true,
