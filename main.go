@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	listenAddr := flag.String("listenAddr", ":"+os.Getenv("PORT"), "server address")
+	listenAddr := flag.String("listenAddr", "0.0.0.0:"+os.Getenv("PORT"), "server address")
 	createDummyData := flag.Bool("dummyData", false, "create set of dummy data for development")
 	flag.Parse()
 
