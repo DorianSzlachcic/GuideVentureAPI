@@ -4,10 +4,11 @@ import (
 	"flag"
 	"guideventureapi/api"
 	"log"
+	"os"
 )
 
 func main() {
-	listenAddr := flag.String("listenAddr", ":8000", "server address")
+	listenAddr := flag.String("listenAddr", os.Getenv("PATH"), "server address")
 	createDummyData := flag.Bool("dummyData", false, "create set of dummy data for development")
 	flag.Parse()
 
