@@ -40,6 +40,7 @@ func (s *Server) GetGames(c *gin.Context) {
 	}
 
 	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Credentials", "true")
 	c.JSON(http.StatusOK, &games)
 }
 
@@ -52,6 +53,7 @@ func (s *Server) GetGame(c *gin.Context) {
 	}
 
 	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Credentials", "true")
 	c.JSON(http.StatusOK, &game)
 }
 
@@ -64,6 +66,7 @@ func (s *Server) GetSteps(c *gin.Context) {
 	}
 
 	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Credentials", "true")
 	c.JSON(http.StatusOK, &steps)
 }
 
@@ -77,6 +80,7 @@ func (s *Server) GetStep(c *gin.Context) {
 	}
 
 	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Credentials", "true")
 	c.JSON(http.StatusOK, &step)
 }
 
@@ -90,6 +94,7 @@ func (s *Server) GetQuestions(c *gin.Context) {
 	}
 
 	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Credentials", "true")
 	c.JSON(http.StatusOK, &questions)
 }
 
