@@ -103,9 +103,9 @@ func (s *Server) Start() error {
 		AllowCredentials: true,
 	}))
 
-	router.GET("/games/", s.GetGames)
-	router.GET("/games/:gameId/", s.GetGame)
-	router.GET("/games/:gameId/steps/", s.GetSteps)
+	router.GET("/games", s.GetGames)
+	router.GET("/games/:gameId", s.GetGame)
+	router.GET("/games/:gameId/steps", s.GetSteps)
 	router.GET("/games/:gameId/steps/:stepIndex", s.GetStep)
 	router.GET("/games/:gameId/steps/:stepIndex/questions", s.GetQuestions)
 
