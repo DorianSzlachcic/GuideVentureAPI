@@ -39,8 +39,6 @@ func (s *Server) GetGames(c *gin.Context) {
 		return
 	}
 
-	c.Header("Access-Control-Allow-Origin", "*")
-	c.Header("Access-Control-Allow-Credentials", "true")
 	c.JSON(http.StatusOK, &games)
 }
 
@@ -52,8 +50,6 @@ func (s *Server) GetGame(c *gin.Context) {
 		return
 	}
 
-	c.Header("Access-Control-Allow-Origin", "*")
-	c.Header("Access-Control-Allow-Credentials", "true")
 	c.JSON(http.StatusOK, &game)
 }
 
@@ -65,8 +61,6 @@ func (s *Server) GetSteps(c *gin.Context) {
 		return
 	}
 
-	c.Header("Access-Control-Allow-Origin", "*")
-	c.Header("Access-Control-Allow-Credentials", "true")
 	c.JSON(http.StatusOK, &steps)
 }
 
@@ -79,8 +73,6 @@ func (s *Server) GetStep(c *gin.Context) {
 		return
 	}
 
-	c.Header("Access-Control-Allow-Origin", "*")
-	c.Header("Access-Control-Allow-Credentials", "true")
 	c.JSON(http.StatusOK, &step)
 }
 
@@ -93,13 +85,28 @@ func (s *Server) GetQuestions(c *gin.Context) {
 		return
 	}
 
-	c.Header("Access-Control-Allow-Origin", "*")
-	c.Header("Access-Control-Allow-Credentials", "true")
 	c.JSON(http.StatusOK, &questions)
+}
+
+func CORSMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT")
+
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
+
+		c.Next()
+	}
 }
 
 func (s *Server) Start() error {
 	router := gin.Default()
+	router.Use(CORSMiddleware())
 
 	router.GET("/games/", s.GetGames)
 	router.GET("/games/:gameId/", s.GetGame)
