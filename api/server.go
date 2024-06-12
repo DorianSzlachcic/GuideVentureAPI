@@ -40,6 +40,7 @@ func (s *Server) GetGames(c *gin.Context) {
 		return
 	}
 
+	c.Header("Referrer-Policy", "origin-when-cross-origin")
 	c.JSON(http.StatusOK, &games)
 }
 
@@ -51,6 +52,7 @@ func (s *Server) GetGame(c *gin.Context) {
 		return
 	}
 
+	c.Header("Referrer-Policy", "origin-when-cross-origin")
 	c.JSON(http.StatusOK, &game)
 }
 
@@ -62,6 +64,7 @@ func (s *Server) GetSteps(c *gin.Context) {
 		return
 	}
 
+	c.Header("Referrer-Policy", "origin-when-cross-origin")
 	c.JSON(http.StatusOK, &steps)
 }
 
@@ -74,6 +77,7 @@ func (s *Server) GetStep(c *gin.Context) {
 		return
 	}
 
+	c.Header("Referrer-Policy", "origin-when-cross-origin")
 	c.JSON(http.StatusOK, &step)
 }
 
@@ -86,6 +90,7 @@ func (s *Server) GetQuestions(c *gin.Context) {
 		return
 	}
 
+	c.Header("Referrer-Policy", "origin-when-cross-origin")
 	c.JSON(http.StatusOK, &questions)
 }
 
