@@ -23,6 +23,5 @@ func main() {
 		log.Panic(err)
 	}
 
-	log.Println("Server running on port ", *listenAddr)
 	log.Fatal(server.Start())
 }
