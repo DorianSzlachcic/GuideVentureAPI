@@ -76,18 +76,6 @@ func (s *Server) GetStep(c *gin.Context) {
 	c.JSON(http.StatusOK, &step)
 }
 
-func (s *Server) GetQuestions(c *gin.Context) {
-	gameId := c.Param("gameId")
-	stepIndex := c.Param("stepIndex")
-	questions, err := s.db.GetQuestions(gameId, stepIndex)
-	if err != nil {
-		c.AbortWithError(http.StatusInternalServerError, err)
-		return
-	}
-
-	c.JSON(http.StatusOK, &questions)
-}
-
 func (s *Server) Start() error {
 	router := gin.Default()
 
@@ -95,7 +83,6 @@ func (s *Server) Start() error {
 	router.GET("/games/:gameId/", s.GetGame)
 	router.GET("/games/:gameId/steps/", s.GetSteps)
 	router.GET("/games/:gameId/steps/:stepIndex", s.GetStep)
-	router.GET("/games/:gameId/steps/:stepIndex/questions", s.GetQuestions)
 
 	return router.Run(s.listenAddr)
 }

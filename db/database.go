@@ -8,5 +8,4 @@ type Database interface {
 	GetGame(string) (*models.Game, error)
 	GetSteps(string) ([]models.Step, error)
 	GetStep(string, string) (*models.Step, error)
-	GetQuestions(string, string) ([]models.Question, error)
 }

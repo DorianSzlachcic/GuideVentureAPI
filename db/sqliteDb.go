@@ -54,89 +54,17 @@ func (s *SQLiteDb) GetGame(gameId string) (*models.Game, error) {
 }
 
 func (s *SQLiteDb) GetSteps(gameId string) ([]models.Step, error) {
-	// rows, err := s.db.Query(queries.SelectSteps, gameId)
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// steps := []models.Step{}
-	// for rows.Next() {
-	// 	var step models.Step
-	// 	err = rows.Scan(
-	// 		&step.Id,
-	// 		&step.GameId,
-	// 		&step.StepIndex,
-	// 		&step.Type,
-	// 		&step.Points,
-	// 		&step.Description,
-	// 		&step.Geolocation[0],
-	// 		&step.Geolocation[1],
-	// 		&step.ImageSource,
-	// 	)
-	// 	if err != nil {
-	// 		return nil, err
-	// 	}
-	// 	steps = append(steps, step)
-	// }
-
-	// return steps, nil
-	return nil, nil
+	var steps []models.Step
+	err := s.db.Find(&steps, "game_id = ?", gameId).Error
+	return steps, err
 }
 
 func (s *SQLiteDb) GetStep(gameId string, stepIndex string) (*models.Step, error) {
-	// row := s.db.QueryRow(queries.SelectStepByIndex, gameId, stepIndex)
-
-	// var step models.Step
-	// err := row.Scan(
-	// 	&step.Id,
-	// 	&step.GameId,
-	// 	&step.StepIndex,
-	// 	&step.Type,
-	// 	&step.Points,
-	// 	&step.Description,
-	// 	&step.Geolocation[0],
-	// 	&step.Geolocation[1],
-	// 	&step.ImageSource,
-	// )
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// return &step, nil
-	return nil, nil
-}
-
-func (s *SQLiteDb) GetQuestions(gameId string, stepIndex string) ([]models.Question, error) {
-	// step := s.db.QueryRow(queries.SelectStepId, gameId, stepIndex)
-
-	// var stepId int
-	// err := step.Scan(&stepId)
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// rows, err := s.db.Query(queries.SelectQuestions, stepId)
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// questions := []models.Question{}
-	// for rows.Next() {
-	// 	var question models.Question
-	// 	err = rows.Scan(
-	// 		&question.Id,
-	// 		&question.StepId,
-	// 		&question.Type,
-	// 		&question.Text,
-	// 		&question.Answers,
-	// 		&question.NumOfCorrectAnswers,
-	// 	)
-	// 	if err != nil {
-	// 		return nil, err
-	// 	}
-	// 	questions = append(questions, question)
-	// }
-
-	// return questions, nil
-	return nil, nil
+	var step models.Step
+	err := s.db.First(&step, "step_index = ? AND game_id = ?", stepIndex, gameId).Error
+	if err != nil {
+		return nil, err
+	}
+	err = s.db.Find(&step.Questions, "step_id = ?", step.ID).Error
+	return &step, err
 }
