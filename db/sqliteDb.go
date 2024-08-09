@@ -42,36 +42,15 @@ func (s *SQLiteDb) CreateDummyData() error {
 }
 
 func (s *SQLiteDb) GetGames() ([]models.Game, error) {
-	// rows, err := s.db.Query(queries.SelectGames)
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// games := []models.Game{}
-	// for rows.Next() {
-	// 	var game models.Game
-	// 	err = rows.Scan(&game.Id, &game.Title, &game.Introduction)
-	// 	if err != nil {
-	// 		return nil, err
-	// 	}
-	// 	games = append(games, game)
-	// }
-
-	// return games, nil
-	return nil, nil
+	var games []models.Game
+	err := s.db.Find(&games).Error
+	return games, err
 }
 
 func (s *SQLiteDb) GetGame(gameId string) (*models.Game, error) {
-	// row := s.db.QueryRow(queries.SelectGameById, gameId)
-
-	// var game models.Game
-	// err := row.Scan(&game.Id, &game.Title, &game.Introduction)
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// return &game, nil
-	return nil, nil
+	var game models.Game
+	err := s.db.First(&game, gameId).Error
+	return &game, err
 }
 
 func (s *SQLiteDb) GetSteps(gameId string) ([]models.Step, error) {

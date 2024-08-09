@@ -1,31 +1,41 @@
 package models
 
 import (
+	"time"
+
 	"gorm.io/gorm"
 )
 
+type Model struct {
+	// Struct used in place of gorm.gormModel, specifies naming in json
+	ID        uint            `json:"id" gorm:"primarykey"`
+	CreatedAt time.Time       `json:"created_at"`
+	UpdatedAt time.Time       `json:"updated_at"`
+	DeletedAt *gorm.DeletedAt `json:"deleted_at,omitempty" gorm:"index"`
+}
+
 type Game struct {
-	gorm.Model
+	Model
 	Title        string `json:"title"`
 	Introduction string `json:"introduction"`
-	Steps        []Step
+	Steps        []Step `json:"-"`
 }
 
 type Step struct {
-	gorm.Model
-	GameID      uint     `json:"game_id"`
-	StepIndex   uint     `json:"step_index"`
-	Type        string   `json:"step_type"`
-	Points      uint     `json:"points"`
-	Description *string  `json:"step_description"`
-	Latitude    *float64 `json:"latitude"`
-	Longitude   *float64 `json:"longitude"`
-	ImageSource *string  `json:"image_source"`
-	Questions   []Question
+	Model
+	GameID      uint       `json:"game_id"`
+	StepIndex   uint       `json:"step_index"`
+	Type        string     `json:"step_type"`
+	Points      uint       `json:"points"`
+	Description *string    `json:"step_description"`
+	Latitude    *float64   `json:"latitude"`
+	Longitude   *float64   `json:"longitude"`
+	ImageSource *string    `json:"image_source"`
+	Questions   []Question `json:"-"`
 }
 
 type Question struct {
-	gorm.Model
+	Model
 	StepID uint   `json:"step_id"`
 	Type   string `json:"question_type"`
 	Text   string `json:"question"`
