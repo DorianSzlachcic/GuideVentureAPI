@@ -1,7 +1,7 @@
-package db
+package sqlite
 
 import (
-	"guideventureapi/models"
+	"guideventureapi/db/models"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -21,7 +21,10 @@ func NewSQLiteDb() (*SQLiteDb, error) {
 		return nil, err
 	}
 
-	db.AutoMigrate(&models.Game{}, &models.Step{}, &models.Question{})
+	err = db.AutoMigrate(&models.Game{}, &models.Step{}, &models.Question{})
+	if err != nil {
+		return nil, err
+	}
 
 	sqliteDb := SQLiteDb{db}
 	return &sqliteDb, nil

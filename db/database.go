@@ -1,6 +1,6 @@
 package db
 
-import "guideventureapi/models"
+import "guideventureapi/db/models"
 
 type Database interface {
 	CreateDummyData() error

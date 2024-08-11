@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"guideventureapi/api"
+	"guideventureapi/db/sqlite"
 	"log"
 	"os"
 )
@@ -18,7 +19,12 @@ func main() {
 	createDummyData := flag.Bool("dummyData", false, "create set of dummy data for development")
 	flag.Parse()
 
-	server, err := api.NewServer(*listenAddr, *createDummyData)
+	serverOptions := []api.Option{api.WithListenAddr(*listenAddr),
+								  api.WithDatabase(sqlite.NewSQLiteDb())}
+	if *createDummyData {
+		serverOptions = append(serverOptions, api.WithDummyData())
+	}
+	server, err := api.NewServer(serverOptions...)
 	if err != nil {
 		log.Panic(err)
 	}
