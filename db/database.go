@@ -1,6 +1,6 @@
 package db
 
-import "guideventureapi/models"
+import "guideventureapi/db/models"
 
 type Database interface {
 	CreateDummyData() error
@@ -8,5 +8,4 @@ type Database interface {
 	GetGame(string) (*models.Game, error)
 	GetSteps(string) ([]models.Step, error)
 	GetStep(string, string) (*models.Step, error)
-	GetQuestions(string, string) ([]models.Question, error)
 }
