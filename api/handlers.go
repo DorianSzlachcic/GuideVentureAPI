@@ -43,7 +43,7 @@ func (s *Server) GetStep(c *gin.Context) {
 	stepIndex := c.Param("stepIndex")
 	step, err := s.db.GetStep(gameId, stepIndex)
 	if err != nil {
-		c.AbortWithError(http.StatusInternalServerError, err)
+		_ = c.AbortWithError(http.StatusInternalServerError, err)
 		return
 	}
 
