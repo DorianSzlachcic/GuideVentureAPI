@@ -12,10 +12,14 @@ type Server struct {
 	db         db.Database
 }
 
+const (
+	ServerDefaultListenAddr string = ":8080"
+)
+
 type Option func(*Server) error
 
 func NewServer(db db.Database, options ...Option) (*Server, error) {
-	server := &Server{db: db}
+	server := &Server{db: db, listenAddr: ServerDefaultListenAddr}
 	for _, opt := range options {
 		if err := opt(server); err != nil {
 			return nil, err
