@@ -9,7 +9,7 @@ import (
 func (s *Server) GetGames(c *gin.Context) {
 	games, err := s.db.GetGames()
 	if err != nil {
-		_ = c.AbortWithError(http.StatusInternalServerError, err)
+		_ = c.Error(err)
 		return
 	}
 
@@ -20,7 +20,7 @@ func (s *Server) GetGame(c *gin.Context) {
 	gameId := c.Param("gameId")
 	game, err := s.db.GetGame(gameId)
 	if err != nil {
-		_ = c.AbortWithError(http.StatusInternalServerError, err)
+		_ = c.Error(err)
 		return
 	}
 
@@ -31,7 +31,7 @@ func (s *Server) GetSteps(c *gin.Context) {
 	gameId := c.Param("gameId")
 	steps, err := s.db.GetSteps(gameId)
 	if err != nil {
-		_ = c.AbortWithError(http.StatusInternalServerError, err)
+		_ = c.Error(err)
 		return
 	}
 
@@ -43,7 +43,7 @@ func (s *Server) GetStep(c *gin.Context) {
 	stepIndex := c.Param("stepIndex")
 	step, err := s.db.GetStep(gameId, stepIndex)
 	if err != nil {
-		_ = c.AbortWithError(http.StatusInternalServerError, err)
+		_ = c.Error(err)
 		return
 	}
 

@@ -1,6 +1,7 @@
 package api
 
 import (
+	"guideventureapi/api/middleware"
 	"guideventureapi/db"
 
 	"github.com/gin-gonic/gin"
@@ -48,6 +49,7 @@ func WithDummyData() Option {
 
 func (s *Server) Start() error {
 	router := gin.Default()
+	router.Use(middleware.ErrorHandler)
 
 	router.GET("/games/", s.GetGames)
 	router.GET("/games/:gameId/", s.GetGame)
