@@ -14,8 +14,8 @@ type Server struct {
 
 type Option func(*Server) error
 
-func NewServer(options ...Option) (*Server, error) {
-	server := &Server{}
+func NewServer(db db.Database, options ...Option) (*Server, error) {
+	server := &Server{db: db}
 	for _, opt := range options {
 		if err := opt(server); err != nil {
 			return nil, err
@@ -27,16 +27,6 @@ func NewServer(options ...Option) (*Server, error) {
 func WithListenAddr(listenAddr string) Option {
 	return func(s *Server) error {
 		s.listenAddr = listenAddr
-		return nil
-	}
-}
-
-func WithDatabase(db db.Database, err error) Option{
-	return func(s *Server) error {
-		if err != nil {
-			return err
-		}
-		s.db = db
 		return nil
 	}
 }
