@@ -21,4 +21,4 @@
 go.work
 
 # Dev database file
-sqlite.db
+# sqlite.db  # Just for the sake of development
